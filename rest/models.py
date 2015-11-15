@@ -1,4 +1,38 @@
 from django.db import models
+import uuid
 
-class Tag(models.Model):
-    name = models.CharField(max_length=200)
+class Contact(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    first_name = models.CharField(max_length=255, null=True, blank=True)
+    middle_name = models.CharField(max_length=255, null=True, blank=True)
+    last_name = models.CharField(max_length=255, null=True, blank=True)
+    organization = models.CharField(max_length=255, null=True, blank=True)
+    image_name = models.CharField(max_length=255, null=True, blank=True)
+    # Simplify: don't use Birthday, Favorite, every char field can be null
+
+# class Tag(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     name = models.CharField(max_length=255, null=True, blank=True)
+#
+# class ContactTagMap(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     detail = models.CharField(max_length=255, null=True, blank=True)
+#     contact_id = models.ForeignKey(Contact, null=True, blank=True)
+#     tag_id = models.ForeignKey(Tag, null=True, blank=True)
+#
+# class PhoneNumber(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     type = models.CharField(max_length=255, null=True, blank=True)
+#     number = models.CharField(max_length=255, null=True, blank=True)
+#     contact_id = models.ForeignKey(Contact, null=True, blank=True)
+#
+# class Address(models.Model):
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     type = models.CharField(max_length=255, null=True, blank=True)
+#     street_line_1 = models.CharField(max_length=255, null=True, blank=True)
+#     street_line_2 = models.CharField(max_length=255, null=True, blank=True)
+#     city = models.CharField(max_length=255, null=True, blank=True)
+#     province = models.CharField(max_length=255, null=True, blank=True)
+#     postal_code = models.CharField(max_length=255, null=True, blank=True)
+#     country = models.CharField(max_length=255, null=True, blank=True)
+#     contact_id = models.ForeignKey(Contact, null=True, blank=True)
