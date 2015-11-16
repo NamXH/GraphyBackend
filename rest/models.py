@@ -2,13 +2,16 @@ from django.db import models
 import uuid
 
 class Contact(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    first_name = models.CharField(max_length=255, null=True, blank=True)
-    middle_name = models.CharField(max_length=255, null=True, blank=True)
-    last_name = models.CharField(max_length=255, null=True, blank=True)
-    organization = models.CharField(max_length=255, null=True, blank=True)
-    image_name = models.CharField(max_length=255, null=True, blank=True)
-    # Simplify: don't use Birthday, Favorite, every char field can be null
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    FirstName = models.CharField(max_length=255, null=True, blank=True)
+    MiddleName = models.CharField(max_length=255, null=True, blank=True)
+    LastName = models.CharField(max_length=255, null=True, blank=True)
+    Organization = models.CharField(max_length=255, null=True, blank=True)
+    ImageName = models.CharField(max_length=255, null=True, blank=True)
+    LastModified = models.DateTimeField(null=True, blank=True)
+    IsDeleted = models.BooleanField(default=False)
+    # Simplify: don't use Birthday, Favorite, every char field can be null.
+    # Use camel case to be compatible out of the box for C# client (instead of converting names).
 
 # class Tag(models.Model):
 #     id = models.UUIDField(primary_key=True, default=uuid.uuid4)

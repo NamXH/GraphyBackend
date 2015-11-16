@@ -1,12 +1,13 @@
 from rest_framework import serializers
-from rest.models import Contact #Tag, PhoneNumber, Email
+
+from rest.models import *
 
 class ContactSerializer(serializers.ModelSerializer):
-    id = serializers.UUIDField()
+    Id = serializers.UUIDField()
 
     class Meta:
         model = Contact
-        fields = ('id', 'first_name', 'middle_name', 'last_name', 'organization', 'image_name')
+        fields = ('Id', 'FirstName', 'MiddleName', 'LastName', 'Organization', 'ImageName', 'LastModified', 'IsDeleted')
 #
 # class TagSerializer(serializers.ModelSerializer):
 #     class Meta:
