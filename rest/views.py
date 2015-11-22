@@ -55,8 +55,8 @@ class ContactDetail(APIView):
         server_contact = self.get_object(pk)
 
         if server_contact is not None:
-            client_last_modified = datetime.strptime(request.META['HTTP_IF_UNMODIFIED_SINCE'], '%a, %d %b %Y %H:%M:%S %Z')
-            client_last_modified.replace(tzinfo=timezone.UTC)
+            if_unmodified_since_datetime = datetime.strptime(request.META['HTTP_IF_UNMODIFIED_SINCE'], '%a, %d %b %Y %H:%M:%S %Z')
+            client_last_modified = if_unmodified_since_datetime.replace(tzinfo=pytz.UTC)
 
             if client_last_modified > server_contact.LastModified:
                 if server_contact.IsDeleted:
