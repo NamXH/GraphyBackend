@@ -1,3 +1,8 @@
+from datetime import datetime
+import pytz
+
+from django.utils import timezone
+
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -36,11 +41,6 @@ class ContactDetail(APIView):
                     if server_contact.IsDeleted:
                         return Response(status=status.HTTP_410_GONE)
                     else:
-                        # serializer = ContactSerializer(contact, data=request.data)
-                        # if serializer.is_valid():
-                        #     serializer.save()
-                        # else:
-                        #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
                         serializer.save()
                         return Response(status=status.HTTP_204_NO_CONTENT)
                 else:
@@ -48,5 +48,25 @@ class ContactDetail(APIView):
                     return Response(server_serializer.data, status=status.HTTP_409_CONFLICT)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            return Response(status=status.HTTP_410_GONE)
+
+    def delete(self, request, pk):
+        server_contact = self.get_object(pk)
+
+        if server_contact is not None:
+            client_last_modified = datetime.strptime(request.META['HTTP_IF_UNMODIFIED_SINCE'], '%a, %d %b %Y %H:%M:%S %Z')
+            client_last_modified.replace(tzinfo=timezone.UTC)
+
+            if client_last_modified > server_contact.LastModified:
+                if server_contact.IsDeleted:
+                    return Response(status=status.HTTP_204_NO_CONTENT)
+                else:
+                    server_contact.IsDeleted = True
+                    server_contact.save()
+                    return Response(status=status.HTTP_204_NO_CONTENT)
+            else:
+                server_serializer = ContactSerializer(server_contact)
+                return Response(server_serializer.data, status=status.HTTP_409_CONFLICT)
         else:
             return Response(status=status.HTTP_410_GONE)
