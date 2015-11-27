@@ -1,12 +1,8 @@
-from datetime import datetime
 import pytz
-
-from django.utils import timezone
-
+from datetime import datetime
 from rest_framework import generics, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 from rest.serializers import *
 
 class ContactList(generics.ListCreateAPIView):
