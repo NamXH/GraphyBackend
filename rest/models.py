@@ -2,7 +2,7 @@ import uuid
 from django.db import models
 
 class Contact(models.Model):
-    Id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     FirstName = models.CharField(max_length=255, null=True, blank=True)
     MiddleName = models.CharField(max_length=255, null=True, blank=True)
     LastName = models.CharField(max_length=255, null=True, blank=True)
@@ -13,24 +13,30 @@ class Contact(models.Model):
     # Simplify: don't use Birthday, Favorite, every char field can be null.
     # Use camel case to be compatible out of the box for C# client (instead of converting names).
 
-# class Tag(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-#     name = models.CharField(max_length=255, null=True, blank=True)
+class Tag(models.Model):
+    Id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+    Name = models.CharField(max_length=255, null=True, blank=True)
+    LastModified = models.DateTimeField(null=True, blank=True)
+    IsDeleted = models.BooleanField(default=False)
 #
 # class ContactTagMap(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False))
 #     detail = models.CharField(max_length=255, null=True, blank=True)
 #     contact_id = models.ForeignKey(Contact, null=True, blank=True)
 #     tag_id = models.ForeignKey(Tag, null=True, blank=True)
+# LastModified = models.DateTimeField(null=True, blank=True)
+# IsDeleted = models.BooleanField(default=False)
 #
 # class PhoneNumber(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False))
 #     type = models.CharField(max_length=255, null=True, blank=True)
 #     number = models.CharField(max_length=255, null=True, blank=True)
 #     contact_id = models.ForeignKey(Contact, null=True, blank=True)
+# LastModified = models.DateTimeField(null=True, blank=True)
+# IsDeleted = models.BooleanField(default=False)
 #
 # class Address(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4)
+#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False))
 #     type = models.CharField(max_length=255, null=True, blank=True)
 #     street_line_1 = models.CharField(max_length=255, null=True, blank=True)
 #     street_line_2 = models.CharField(max_length=255, null=True, blank=True)
@@ -39,3 +45,5 @@ class Contact(models.Model):
 #     postal_code = models.CharField(max_length=255, null=True, blank=True)
 #     country = models.CharField(max_length=255, null=True, blank=True)
 #     contact_id = models.ForeignKey(Contact, null=True, blank=True)
+# LastModified = models.DateTimeField(null=True, blank=True)
+# IsDeleted = models.BooleanField(default=False)
