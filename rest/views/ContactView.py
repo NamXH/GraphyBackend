@@ -27,7 +27,7 @@ class ContactDetail(APIView):
 
     def put(self, request, pk):
         if 'Id' in request.data and request.data['Id'] != pk:
-            return Response("Id is not the same as primary key in url!", status=status.HTTP_400_BAD_REQUEST)
+            return Response("Id is not the same as primary key in url!", status=status.HTTP_400_BAD_REQUEST) # Check this since serializer.save() always save the record using pk as identifier.
 
         server_contact = self.get_object(pk)
 
