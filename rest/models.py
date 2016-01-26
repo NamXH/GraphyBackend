@@ -41,8 +41,8 @@ class ContactTagMap(models.Model):
 class Relationship(models.Model):
     Id = models.UUIDField(primary_key=True, default=uuid.uuid4)
     Detail = models.CharField(max_length=255, null=True, blank=True)
-    FromContactId = models.ForeignKey(Contact, null=True, blank=True)
-    ToContactId = models.ForeignKey(Contact, null=True, blank=True)
+    FromContactId = models.ForeignKey(Contact, null=True, blank=True, related_name='from_contact')
+    ToContactId = models.ForeignKey(Contact, null=True, blank=True, related_name='to_contact')
     RelationshipTypeId = models.ForeignKey(RelationshipType, null=True, blank=True)
     LastModified = models.DateTimeField(null=True, blank=True)
     IsDeleted = models.BooleanField(default=False)

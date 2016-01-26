@@ -1,2 +1,11 @@
 from ContactView import ContactList, ContactDetail
 from TagView import TagList, TagDetail
+from RelationshipTypeView import RelationshipTypeList, RelationshipTypeDetail
+from ContactTagMapView import ContactTagMapList, ContactTagMapDetail
+from RelationshipView import RelationshipList, RelationshipDetail
+from PhoneNumberView import PhoneNumberList, PhoneNumberDetail
+from AddressView import AddressList, AddressDetail
+from UrlView import UrlList, UrlDetail
+from EmailView import EmailList, EmailDetail
+from SpecialDateView import SpecialDateList, SpecialDateDetail
+from InstantMessageView import InstantMessageList, InstantMessageDetail
