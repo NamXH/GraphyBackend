@@ -23,8 +23,8 @@ urlpatterns = [
     url(r'^addresses/$', views.AddressList.as_view(), name='address-list'),
     url(r'^addresses/(?P<pk>[^/]+)/$', views.AddressDetail.as_view(), name='address-detail'),
 
-    url(r'^urls/$', views.TagList.as_view(), name='url-list'),
-    url(r'^urls/(?P<pk>[^/]+)/$', views.TagDetail.as_view(), name='url-detail'),
+    # url(r'^urls/$', views.TagList.as_view(), name='url-list'),
+    # url(r'^urls/(?P<pk>[^/]+)/$', views.TagDetail.as_view(), name='url-detail'),
 
     url(r'^emails/$', views.EmailList.as_view(), name='email-list'),
     url(r'^emails/(?P<pk>[^/]+)/$', views.EmailDetail.as_view(), name='email-detail'),
