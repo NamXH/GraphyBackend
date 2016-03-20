@@ -59,7 +59,7 @@ class ContactDetail(APIView):
 
         if server_contact is not None:
             if_unmodified_since_datetime = datetime.strptime(request.META['HTTP_IF_UNMODIFIED_SINCE'], '%a, %d %b %Y %H:%M:%S %Z')
-            client_last_modified = if_unmodified_since_datetime.replace(tzinfo=pytz.UTC)
+            client_last_modified = if_unmodified_since_datetime.replace(tzinfo=pytz.UTC) # convert everything to UTC
 
             if client_last_modified > server_contact.LastModified:
                 if server_contact.IsDeleted:
